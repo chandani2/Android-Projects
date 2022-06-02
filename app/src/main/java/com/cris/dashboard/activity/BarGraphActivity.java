@@ -169,7 +169,7 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 Toast.makeText(BarGraphActivity.this, "You are Selecting the chart", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(BarGraphActivity.this, JourneyActivity.class);
+                Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
                 startActivity(intent);
             }
 
