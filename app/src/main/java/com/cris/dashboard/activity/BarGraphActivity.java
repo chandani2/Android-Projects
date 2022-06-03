@@ -463,14 +463,3 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         return colors;
     }
 }
-
-//    String journey, season, platform;
-
-//    Intent intent = getIntent();
-//        journey = intent.getStringExtra("journey");
-//                season = intent.getStringExtra("journey");
-//                platform = intent.getStringExtra("journey");
-//
-//                Log.e("TAG", "Pie journey: "+journey);
-//                Log.e("TAG", "Pie season: "+season);
-//                Log.e("TAG", "Pie journey: "+platform);
