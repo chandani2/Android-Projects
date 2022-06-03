@@ -45,10 +45,15 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
     private TextView tvX, tvY;
 
     private Typeface tf;
+    String journey, season, platform;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pie_graph_month);
+
         setTitle("PiePolylineChartActivity");
 
         tvX = findViewById(R.id.tvXMax);
@@ -111,6 +116,15 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
     }
 
     private void setData(int count, float range) {
+
+        Intent intent = getIntent();
+        journey = intent.getStringExtra("journey");
+        season = intent.getStringExtra("journey");
+        platform = intent.getStringExtra("journey");
+
+        Log.e("TAG", "Pie journey: "+journey);
+        Log.e("TAG", "Pie season: "+season);
+        Log.e("TAG", "Pie journey: "+platform);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
 

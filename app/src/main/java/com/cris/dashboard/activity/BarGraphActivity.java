@@ -168,9 +168,16 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Toast.makeText(BarGraphActivity.this, "You are Selecting the chart", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
-                startActivity(intent);
+
+                    Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
+                    intent.putExtra("journey", journey);
+                    intent.putExtra("season", season);
+                    intent.putExtra("platform", platform);
+                    startActivity(intent);
+                    Log.e(TAG, "journeyOne onProgressChanged: "+journey);
+                    Log.e(TAG, "seasonTwo onProgressChanged: "+season);
+                    Log.e(TAG, "platformThree onProgressChanged: "+platform);
+
             }
 
             @Override
@@ -219,9 +226,6 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         l.setFormToTextSpace(4f);
         l.setXEntrySpace(6f);
 
-//        XAxis xAxis = chart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
@@ -232,20 +236,6 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         xAxis.setValueFormatter(new IndexAxisValueFormatter(monthName));
 
         Log.e(TAG, "onCreate: "+monthName);
-
-//        xAxis.setAxisMinimum(0f);
-//        xAxis.setGranularity(1f);
-
-//        xAxis.setValueFormatter(new IAxisValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value, AxisBase axis) {
-//                return months[(int) value % months.length];
-//            }
-//        });
-
-        // chart.setDrawLegend(false);
-
-
 
 
     }
@@ -273,14 +263,20 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
                 season = jsonObject.getString("season");
                 platform = jsonObject.getString("platform");
 
-
-
-                Log.e(TAG, "month : "+month);
-                Log.e(TAG, "journey : "+journey);
-                Log.e(TAG, "season : "+season);
-                Log.e(TAG, "platform : "+platform);
-
                 Log.e(TAG, "jsonObject : "+jsonObject);
+
+                if (month.equals("Jan")){
+//                    Toast.makeText(BarGraphActivity.this, "You are selecting January Month", Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
+//                    startActivity(intent);
+                    Log.e(TAG, "journey onProgressChanged: "+journey);
+                    Log.e(TAG, "season onProgressChanged: "+season);
+                    Log.e(TAG, "platform onProgressChanged: "+platform);
+                }
+
+                else{
+//                    Toast.makeText(BarGraphActivity.this, "You are selecting any Month", Toast.LENGTH_LONG).show();
+                }
 
                 values.add(new BarEntry(
                         i,
@@ -290,9 +286,6 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
 
             }
 
-            totalPlatformtckt = platform;
-            totalseasontckt = season;
-            totaljourneytckt = journey;
             totalTickets = platform+season+journey;
 
             Log.e(TAG, "totalPlatformtckt : "+totalPlatformtckt);
@@ -470,3 +463,14 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         return colors;
     }
 }
+
+//    String journey, season, platform;
+
+//    Intent intent = getIntent();
+//        journey = intent.getStringExtra("journey");
+//                season = intent.getStringExtra("journey");
+//                platform = intent.getStringExtra("journey");
+//
+//                Log.e("TAG", "Pie journey: "+journey);
+//                Log.e("TAG", "Pie season: "+season);
+//                Log.e("TAG", "Pie journey: "+platform);
