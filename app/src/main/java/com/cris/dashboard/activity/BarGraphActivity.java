@@ -166,8 +166,8 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
                 Log.e(TAG, "platformThree onProgressChanged: "+platform);
 
 
-                if (month.equals("Jan")){
-                    Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
+                if (month.equals("Dec")){
+                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
                     intent.putExtra("journey", journey);
                     intent.putExtra("season", season);
                     intent.putExtra("platform", platform);

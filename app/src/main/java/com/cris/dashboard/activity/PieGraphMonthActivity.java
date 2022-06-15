@@ -119,14 +119,14 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
 
     private void setData(int count, float range) {
 
-        Intent intent = getIntent();
-        journey = intent.getStringExtra("journey");
-        season = intent.getStringExtra("season");
-        platform = intent.getStringExtra("platform");
-
-        Log.e("TAG", "onCreate: "+journey);
-        Log.e("TAG", "season: "+season);
-        Log.e("TAG", "platform: "+platform);
+//        Intent intent = getIntent();
+//        journey = intent.getStringExtra("journey");
+//        season = intent.getStringExtra("season");
+//        platform = intent.getStringExtra("platform");
+//
+//        Log.e("TAG", "onCreate: "+journey);
+//        Log.e("TAG", "season: "+season);
+//        Log.e("TAG", "platform: "+platform);
 
 
         ArrayList<PieEntry> entries = new ArrayList<>();

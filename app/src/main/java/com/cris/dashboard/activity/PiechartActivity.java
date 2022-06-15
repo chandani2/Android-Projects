@@ -1,49 +1,86 @@
 package com.cris.dashboard.activity;
 
+// Import the required libraries
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.cris.dashboard.R;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
+
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
+
+import org.eazegraph.lib.models.PieModel;
 
 import java.util.ArrayList;
 
 public class PiechartActivity extends AppCompatActivity {
+    TextView tvR, tvPython, tvCPP;
     PieChart pieChart;
-    PieData pieData;
-    PieDataSet pieDataSet;
-    ArrayList pieEntries;
-    ArrayList PieEntryLabels;
+    String journey, season, platform;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piechart);
 
-        pieChart = findViewById(R.id.pieChart);
-        getEntries();
-        pieDataSet = new PieDataSet(pieEntries, "");
-        pieData = new PieData(pieDataSet);
-        pieChart.setData(pieData);
-        pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-        pieDataSet.setSliceSpace(2f);
-        pieDataSet.setValueTextColor(Color.WHITE);
-        pieDataSet.setValueTextSize(10f);
-        pieDataSet.setSliceSpace(5f);
+        // Link those objects with their
+        // respective id's that
+        // we have given in .XML file
+        tvR = findViewById(R.id.tvR);
+        tvPython = findViewById(R.id.tvPython);
+        tvCPP = findViewById(R.id.tvCPP);
+        pieChart = findViewById(R.id.piechart);
+
+        setTitle("Pie Chart Activity");
+
+        // Creating a method setData()
+        // to set the text in text view and pie chart
+        setData();
     }
-    private void getEntries() {
-        pieEntries = new ArrayList<>();
-        pieEntries.add(new PieEntry(2f, 0));
-        pieEntries.add(new PieEntry(4f, 1));
-        pieEntries.add(new PieEntry(6f, 2));
-        pieEntries.add(new PieEntry(8f, 3));
-        pieEntries.add(new PieEntry(7f, 4));
-        pieEntries.add(new PieEntry(3f, 5));
+
+    @SuppressLint("SetTextI18n")
+    private void setData()
+    {
+
+        Intent intent = getIntent();
+        journey = intent.getStringExtra("journey");
+        season = intent.getStringExtra("season");
+        platform = intent.getStringExtra("platform");
+
+        Log.e("TAG", "onCreate: "+journey);
+        Log.e("TAG", "season: "+season);
+        Log.e("TAG", "platform: "+platform);
+
+
+        // Set the percentage of language used
+        tvR.setText(Integer.toString(Integer.parseInt(journey)));
+        tvPython.setText(Integer.toString(Integer.parseInt(season)));
+        tvCPP.setText(Integer.toString(Integer.parseInt(platform)));
+
+        // Set the data and color to the pie chart
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Journey",
+                        Integer.parseInt(tvR.getText().toString()),
+                        Color.parseColor("#FFA726")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Season",
+                        Integer.parseInt(tvPython.getText().toString()),
+                        Color.parseColor("#66BB6A")));
+        pieChart.addPieSlice(
+                new PieModel(
+                        "Platform",
+                        Integer.parseInt(tvCPP.getText().toString()),
+                        Color.parseColor("#EF5350")));
+
+        // To animate the pie chart
+        pieChart.startAnimation();
     }
 }
