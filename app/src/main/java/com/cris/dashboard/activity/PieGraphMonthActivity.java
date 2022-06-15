@@ -19,11 +19,11 @@ import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
-
 import com.cris.dashboard.R;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -35,7 +35,10 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.cris.dashboard.notimportant.DemoBase;
 
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeListener,
         OnChartValueSelectedListener {
@@ -53,8 +56,7 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pie_graph_month);
-
-        setTitle("PiePolylineChartActivity");
+        setTitle("Pie Polyline Chart Activity");
 
         tvX = findViewById(R.id.tvXMax);
         tvY = findViewById(R.id.tvYMax);
@@ -101,8 +103,8 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
         // add a selection listener
         chart.setOnChartValueSelectedListener(this);
 
-        seekBarX.setProgress(4);
-        seekBarY.setProgress(100);
+        seekBarX.setProgress(3);
+        seekBarY.setProgress(300);
 
         chart.animateY(1400, Easing.EaseInOutQuad);
         // chart.spin(2000, 0, 360);
@@ -119,20 +121,27 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
 
         Intent intent = getIntent();
         journey = intent.getStringExtra("journey");
-        season = intent.getStringExtra("journey");
-        platform = intent.getStringExtra("journey");
+        season = intent.getStringExtra("season");
+        platform = intent.getStringExtra("platform");
 
-        Log.e("TAG", "Pie journey: "+journey);
-        Log.e("TAG", "Pie season: "+season);
-        Log.e("TAG", "Pie journey: "+platform);
+        Log.e("TAG", "onCreate: "+journey);
+        Log.e("TAG", "season: "+season);
+        Log.e("TAG", "platform: "+platform);
+
 
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         for (int i = 0; i < count; i++) {
-            entries.add(new PieEntry((float) (Math.random() * range) + range / 5, parties[i % parties.length]));
+            entries.add(new PieEntry((float) (Math.random() * range) + range / 5, ticketType[i % ticketType.length]));
+
+//            entries.add(new PieEntry(
+//                    i,
+//                    String.valueOf(new float[]{Float.parseFloat(journey), Float.parseFloat(season), Float.parseFloat(platform)}), new String[]{ticketType[i % ticketType.length]}));
         }
+
+
 
         PieDataSet dataSet = new PieDataSet(entries, "Election Results");
         dataSet.setSliceSpace(3f);
@@ -297,7 +306,7 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
 
     private SpannableString generateCenterSpannableText() {
 
-        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by Philipp Jahoda");
+        SpannableString s = new SpannableString("MPAndroidChart\ndeveloped by ChandaniKumari");
         s.setSpan(new RelativeSizeSpan(1.5f), 0, 14, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 14, s.length() - 15, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 14, s.length() - 15, 0);

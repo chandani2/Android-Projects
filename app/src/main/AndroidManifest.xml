@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DashBoard">
         <activity
+            android:name=".activity.PiechartActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.PieGraphMonthActivity"
             android:exported="false" />
         <activity

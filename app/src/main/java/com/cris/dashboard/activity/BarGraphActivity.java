@@ -1,7 +1,6 @@
 package com.cris.dashboard.activity;
 
 import static android.content.ContentValues.TAG;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,7 +17,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cris.dashboard.R;
 import com.cris.dashboard.custom.MyAxisValueFormatter;
 import com.cris.dashboard.custom.MyValueFormatter;
@@ -39,11 +37,9 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +49,6 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
     private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
     JSONArray arraydata;
-
     String month;
     String journey;
     String season;
@@ -72,9 +67,6 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_bar_graph);
-
-
-
 
         ticketsData ="{\"ticketType\":[{\n" +
                 "    \"month\": \"Jan\",\n" +
@@ -169,14 +161,23 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
             @Override
             public void onValueSelected(Entry e, Highlight h) {
 
+                Log.e(TAG, "journeyOne onProgressChanged: "+journey);
+                Log.e(TAG, "seasonTwo onProgressChanged: "+season);
+                Log.e(TAG, "platformThree onProgressChanged: "+platform);
+
+
+                if (month.equals("Jan")){
                     Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
                     intent.putExtra("journey", journey);
                     intent.putExtra("season", season);
                     intent.putExtra("platform", platform);
                     startActivity(intent);
-                    Log.e(TAG, "journeyOne onProgressChanged: "+journey);
-                    Log.e(TAG, "seasonTwo onProgressChanged: "+season);
-                    Log.e(TAG, "platformThree onProgressChanged: "+platform);
+                }
+
+                else{
+                    Toast.makeText(BarGraphActivity.this, "You are selecting any Month", Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "month Name: "+month);
+                }
 
             }
 
@@ -229,14 +230,13 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        final String[] monthName = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"}; // Your List / array with String Values For X-axis Labels
+        final String[] monthName = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}; // Your List / array with String Values For X-axis Labels
 
 // Set the value formatter
        xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(monthName));
 
         Log.e(TAG, "onCreate: "+monthName);
-
 
     }
 
@@ -264,19 +264,7 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
                 platform = jsonObject.getString("platform");
 
                 Log.e(TAG, "jsonObject : "+jsonObject);
-
-                if (month.equals("Jan")){
-//                    Toast.makeText(BarGraphActivity.this, "You are selecting January Month", Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
-//                    startActivity(intent);
-                    Log.e(TAG, "journey onProgressChanged: "+journey);
-                    Log.e(TAG, "season onProgressChanged: "+season);
-                    Log.e(TAG, "platform onProgressChanged: "+platform);
-                }
-
-                else{
-//                    Toast.makeText(BarGraphActivity.this, "You are selecting any Month", Toast.LENGTH_LONG).show();
-                }
+                Log.e(TAG, "month jsonObject : "+month);
 
                 values.add(new BarEntry(
                         i,

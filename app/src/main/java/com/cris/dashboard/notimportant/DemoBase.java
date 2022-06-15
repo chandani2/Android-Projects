@@ -2,6 +2,7 @@
 package com.cris.dashboard.notimportant;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -33,6 +34,10 @@ public abstract class DemoBase extends AppCompatActivity implements ActivityComp
             "Party I", "Party J", "Party K", "Party L", "Party M", "Party N", "Party O", "Party P",
             "Party Q", "Party R", "Party S", "Party T", "Party U", "Party V", "Party W", "Party X",
             "Party Y", "Party Z"
+    };
+
+    protected final String[] ticketType = new String[] {
+            "Journey", "Season", "Platform"
     };
 
     private static final int PERMISSION_STORAGE = 0;
