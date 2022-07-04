@@ -59,9 +59,9 @@ public class PiechartActivity extends AppCompatActivity {
 
 
         // Set the percentage of language used
-        tvR.setText(Integer.toString(Integer.parseInt(journey)));
-        tvPython.setText(Integer.toString(Integer.parseInt(season)));
-        tvCPP.setText(Integer.toString(Integer.parseInt(platform)));
+        tvR.setText(journey);
+        tvPython.setText(season);
+        tvCPP.setText(platform);
 
         // Set the data and color to the pie chart
         pieChart.addPieSlice(
