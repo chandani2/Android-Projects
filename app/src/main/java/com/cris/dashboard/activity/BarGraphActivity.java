@@ -376,6 +376,7 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
             }
 
             Log.e(TAG, "arrayIndex : "+arraydata.get(2));
+            Log.e(TAG, "arrayIndex : "+arraydata.length());
 
             indexjan = arraydata.get(0);
             Log.e(TAG, "indexjan: "+indexjan);
