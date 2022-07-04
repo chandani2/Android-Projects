@@ -45,6 +45,7 @@ import java.util.List;
 
 public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListener, OnChartValueSelectedListener {
 
+    private static final String TAG = BarGraphActivity.class.getSimpleName();
     private BarChart chart;
     private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
@@ -224,104 +225,14 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
                 Log.e(TAG, "Highlight: "+h.getY()+" getX "+h.getX()+" Highlight data "+h.getDataIndex());
 
 
-                if (e.getX()==0.0){
+                if (e.getX()>=0.0 && e.getX()<=11.0){
                     Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
+                    float[] tickets = values.get((int)e.getX()).getYVals();
+                    intent.putExtra("journey", String.valueOf((int)tickets[0]));
+                    intent.putExtra("season", String.valueOf((int)tickets[1]));
+                    intent.putExtra("platform",String.valueOf((int)tickets[2]));
                     startActivity(intent);
-                }
-
-
-                else if(e.getX()==1.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==2.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==3.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==4.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==5.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==6.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==7.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==8.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==9.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==10.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else if(e.getX()==11.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
-                    intent.putExtra("journey", journey);
-                    intent.putExtra("season", season);
-                    intent.putExtra("platform", platform);
-                    startActivity(intent);
-                }
-
-                else{
+                } else{
                     Toast.makeText(BarGraphActivity.this, "You are selecting any Month", Toast.LENGTH_LONG).show();
                     Log.e(TAG, "month Name: "+month);
                 }
@@ -336,6 +247,7 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
 
     }
 
+    private ArrayList<BarEntry> values;
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
@@ -349,7 +261,7 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
 
             arraydata =parsedata.getJSONArray("ticketType");
            // List<BarEntry> values = new ArrayList<BarEntry>();
-          ArrayList<BarEntry> values = new ArrayList<>();
+             values = new ArrayList<>();
 
             for (int i=0; i<arraydata.length(); i++){
                 JSONObject jsonObject = arraydata.getJSONObject(i);
