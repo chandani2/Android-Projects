@@ -119,14 +119,14 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
 
     private void setData(int count, float range) {
 
-//        Intent intent = getIntent();
-//        journey = intent.getStringExtra("journey");
-//        season = intent.getStringExtra("season");
-//        platform = intent.getStringExtra("platform");
-//
-//        Log.e("TAG", "onCreate: "+journey);
-//        Log.e("TAG", "season: "+season);
-//        Log.e("TAG", "platform: "+platform);
+        Intent intent = getIntent();
+        journey = intent.getStringExtra("journey");
+        season = intent.getStringExtra("season");
+        platform = intent.getStringExtra("platform");
+
+        Log.e("TAG", "journey: "+journey);
+        Log.e("TAG", "season: "+season);
+        Log.e("TAG", "platform: "+platform);
 
 
         ArrayList<PieEntry> entries = new ArrayList<>();
@@ -134,11 +134,10 @@ public class PieGraphMonthActivity extends DemoBase implements OnSeekBarChangeLi
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
         for (int i = 0; i < count; i++) {
-            entries.add(new PieEntry((float) (Math.random() * range) + range / 5, ticketType[i % ticketType.length]));
-
+            entries.add(new PieEntry((float) (Math.random()) + range / 3, ticketType[i % ticketType.length]));
 //            entries.add(new PieEntry(
 //                    i,
-//                    String.valueOf(new float[]{Float.parseFloat(journey), Float.parseFloat(season), Float.parseFloat(platform)}), new String[]{ticketType[i % ticketType.length]}));
+//                    String.valueOf(new float[]{Float.parseFloat(journey), Float.parseFloat(season), Float.parseFloat(platform)}), ticketType[i % ticketType.length]));
         }
 
 

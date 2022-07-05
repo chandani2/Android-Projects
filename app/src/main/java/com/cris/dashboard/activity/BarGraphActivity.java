@@ -41,6 +41,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListener, OnChartValueSelectedListener {
@@ -226,12 +227,16 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
 
 
                 if (e.getX()>=0.0 && e.getX()<=11.0){
-                    Intent intent = new Intent(BarGraphActivity.this, PiechartActivity.class);
+                    Intent intent = new Intent(BarGraphActivity.this, PieGraphMonthActivity.class);
                     float[] tickets = values.get((int)e.getX()).getYVals();
                     intent.putExtra("journey", String.valueOf((int)tickets[0]));
                     intent.putExtra("season", String.valueOf((int)tickets[1]));
                     intent.putExtra("platform",String.valueOf((int)tickets[2]));
                     startActivity(intent);
+
+                    Log.e(TAG, "tickets: "+String.valueOf((int)tickets[0]));
+                    Log.e(TAG, "onValueSelected tickets: "+tickets);
+
                 } else{
                     Toast.makeText(BarGraphActivity.this, "You are selecting any Month", Toast.LENGTH_LONG).show();
                     Log.e(TAG, "month Name: "+month);
@@ -248,6 +253,7 @@ public class BarGraphActivity extends DemoBase implements OnSeekBarChangeListene
     }
 
     private ArrayList<BarEntry> values;
+
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
